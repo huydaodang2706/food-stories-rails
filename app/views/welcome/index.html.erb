@@ -1,0 +1,13 @@
+<header class="main-header">
+  <div class="title">
+    <h1 class="header-h1">Food Travels</h1>
+    <h4 class="header-h4">Share your food travel story</h4>
+      <br>
+      <% if current_user %>
+        <%= link_to "Create Your Story", class: "btn btn-default" %>
+      <% else %>
+        <%= link_to "Sign up to create your food travel story",  class: "btn btn-default" %>
+      <% end %>
+  </div>
+</header>
+<div class="center jumbotron"></div>
