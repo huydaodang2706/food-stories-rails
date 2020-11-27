@@ -6,10 +6,6 @@ Web app where users can connect to share their food travel stories and get recom
 
 ### Usage
 
-View the app here [https://food-travels.herokuapp.com/](https://food-travels.herokuapp.com/).
-
-Or clone the repo and then install the needed gems locally:
-
 ```
 $ bundle install --without production
 ```
