@@ -1,0 +1,33 @@
+<div class="container">
+  <div class=" well col-sm-6">
+    <h2>Edit Your Food Story</h2><br>
+    <%= form_for(@story) do |story_builder| %>
+      <%= render 'shared/error_messages' %>
+
+      <p>
+        <%= story_builder.label :title %>
+        <%= story_builder.text_field :title, class: 'form-control' %><br>
+      </p>
+
+      <p>
+        <%= story_builder.label :location %>
+        <%= story_builder.text_field :location, class: 'form-control' %><br>
+      </p>
+
+      <%= story_builder.fields_for :food do |food_builder| %>
+        <p><strong>Food Name</strong> <%= food_builder.text_field :name, class: 'form-control' %><br></p>
+        <p><strong>Type of Food</strong> <%= food_builder.text_field :category, class: 'form-control' %><br></p>
+      <% end %>
+
+      <p>
+        <%= story_builder.label :content %>
+        <%= story_builder.text_area :content, rows: 10, class: 'form-control' %><br>
+      </p>
+
+      <p><strong>Recommendations</strong><%= story_builder.text_field :recommendation, class: 'form-control' %><br></p>
+
+
+      <%= story_builder.submit "Update Story", class: "btn btn-md btn-primary" %>
+    <% end %>
+  </div>
+</div>

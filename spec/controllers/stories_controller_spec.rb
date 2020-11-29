@@ -23,10 +23,10 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe FoodsController, type: :controller do
+RSpec.describe StoriesController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # Food. As you add validations to Food, be sure to
+  # Story. As you add validations to Story, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -38,12 +38,12 @@ RSpec.describe FoodsController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # FoodsController. Be sure to keep this updated too.
+  # StoriesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
     it "returns a success response" do
-      Food.create! valid_attributes
+      Story.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end
@@ -51,8 +51,8 @@ RSpec.describe FoodsController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      food = Food.create! valid_attributes
-      get :show, params: {id: food.to_param}, session: valid_session
+      story = Story.create! valid_attributes
+      get :show, params: {id: story.to_param}, session: valid_session
       expect(response).to be_successful
     end
   end
@@ -66,29 +66,29 @@ RSpec.describe FoodsController, type: :controller do
 
   describe "GET #edit" do
     it "returns a success response" do
-      food = Food.create! valid_attributes
-      get :edit, params: {id: food.to_param}, session: valid_session
+      story = Story.create! valid_attributes
+      get :edit, params: {id: story.to_param}, session: valid_session
       expect(response).to be_successful
     end
   end
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new Food" do
+      it "creates a new Story" do
         expect {
-          post :create, params: {food: valid_attributes}, session: valid_session
-        }.to change(Food, :count).by(1)
+          post :create, params: {story: valid_attributes}, session: valid_session
+        }.to change(Story, :count).by(1)
       end
 
-      it "redirects to the created food" do
-        post :create, params: {food: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Food.last)
+      it "redirects to the created story" do
+        post :create, params: {story: valid_attributes}, session: valid_session
+        expect(response).to redirect_to(Story.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {food: invalid_attributes}, session: valid_session
+        post :create, params: {story: invalid_attributes}, session: valid_session
         expect(response).to be_successful
       end
     end
@@ -100,41 +100,41 @@ RSpec.describe FoodsController, type: :controller do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested food" do
-        food = Food.create! valid_attributes
-        put :update, params: {id: food.to_param, food: new_attributes}, session: valid_session
-        food.reload
+      it "updates the requested story" do
+        story = Story.create! valid_attributes
+        put :update, params: {id: story.to_param, story: new_attributes}, session: valid_session
+        story.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the food" do
-        food = Food.create! valid_attributes
-        put :update, params: {id: food.to_param, food: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(food)
+      it "redirects to the story" do
+        story = Story.create! valid_attributes
+        put :update, params: {id: story.to_param, story: valid_attributes}, session: valid_session
+        expect(response).to redirect_to(story)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        food = Food.create! valid_attributes
-        put :update, params: {id: food.to_param, food: invalid_attributes}, session: valid_session
+        story = Story.create! valid_attributes
+        put :update, params: {id: story.to_param, story: invalid_attributes}, session: valid_session
         expect(response).to be_successful
       end
     end
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested food" do
-      food = Food.create! valid_attributes
+    it "destroys the requested story" do
+      story = Story.create! valid_attributes
       expect {
-        delete :destroy, params: {id: food.to_param}, session: valid_session
-      }.to change(Food, :count).by(-1)
+        delete :destroy, params: {id: story.to_param}, session: valid_session
+      }.to change(Story, :count).by(-1)
     end
 
-    it "redirects to the foods list" do
-      food = Food.create! valid_attributes
-      delete :destroy, params: {id: food.to_param}, session: valid_session
-      expect(response).to redirect_to(foods_url)
+    it "redirects to the stories list" do
+      story = Story.create! valid_attributes
+      delete :destroy, params: {id: story.to_param}, session: valid_session
+      expect(response).to redirect_to(stories_url)
     end
   end
 
