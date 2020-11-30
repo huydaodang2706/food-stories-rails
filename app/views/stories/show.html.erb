@@ -1,0 +1,41 @@
+<div class="container">
+  <div class=" well col-sm-6">
+    <%= render 'shared/error_messages' %>
+    <h4>Food Travel Story</h4>
+
+    <h2>Title: <span class="storyTitle"><%=@story.title%></span></h2>
+    <p>Written by: <span class="storyUserName"><%= @story.user.name %></span></p>
+    <p>Location: <span class="storyLocation"><%=@story.location%></span></p>
+    <p>Name: <span class="storyFoodName"><%=@food.name%></span></p>
+    <p>Type of Food: <span class="storyFoodCategory"><%=@food.category%></span></p>
+
+    <p>Content: <span class="storyContent"><%=@story.content%></span></p>
+    <p>Recommendations: <span class="storyRecommendation"><%=@story.recommendation%></span></p><br>
+
+    <%= link_to "Update Food Travel Story", edit_story_path(@story), class: "btn btn-info btn-sm dest_button" %><br><br>
+    <%= link_to "Delete Food Travel Story", [@story], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning btn-sm dest_button" %><br><br>
+
+    <!--<% if current_user %>-->
+    <!--  <h4>Add a comment:</h4>-->
+    <!--    <%= form_for @comment, url: story_comments_path(@story, @comment)  do |f| %>-->
+    <!--      <p><strong>Content</strong> <%= f.text_area :content, class: 'commentBox form-control' %></p>-->
+          <!-- <%= f.submit "Create Comment", class: "btn btn-sm btn-primary" %> -->
+    <!--      <button type="submit" class="btn btn-sm btn-primary">Create Comment</button>-->
+    <!--    <% end %><br>-->
+    <!--<% else %>-->
+    <!--  <p>Please log in order to add a comment.</p>-->
+    <!--<% end %>-->
+    <!--<h4>Comments:</h4>-->
+    <!--<div id="submitted-comments">-->
+    <!--  <% @story.comments.each do |comment| %>-->
+    <!--  <div class="well well-white" id="comment-<%= comment.id %>">-->
+    <!--    <strong class="commentUserName"><%= comment.user.name %></strong> says: <span class="commentContent"><%= comment.content %></span>-->
+    <!--  </div>-->
+    <!--  <% end %>-->
+    <!--</div>-->
+
+    <a href="#" class="js-previous btn btn-primary btn-sm" data-id="<%=@story.id%>">View Previous Food Story</a><br><br>
+    <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@story.id%>">View Next Food Story</a><br><br>
+  </div>
+
+</div>
