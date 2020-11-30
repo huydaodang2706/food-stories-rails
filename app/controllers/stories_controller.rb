@@ -10,6 +10,15 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
+    @stories = Story.find(params[:id])
+    @food = @stories.food
+    if current_user
+      @comment = current_user.comments.build(stories: @stories)
+    end
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json:  @stories }
+    end
   end
 
   # GET /stories/new
