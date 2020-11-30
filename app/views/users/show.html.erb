@@ -1,17 +1,4 @@
-<div class="container">
-  <div class="col-md-8 well">
-    <h3>Welcome, <%= @user.name %>!</h3>
-    <h4>Email: <%= @user.email %></h4>
-    <%= User.most_destinations.name %> has written the most food travel stories!
-  </div>
+<h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p>
 
-  <div id="userDestinationsShowInfo" class=" well col-sm-10">
-    <h4>Your Food Travel Stories:</h4>
-    <% @user.destinations.each do |destination| %>
-      <p><%= link_to destination.title, destination_path(destination) %>
-      <div id="content-<%= destination.id %>"><%= destination.content.truncate(200) %>
-        <a href='#' data-id ="<%= destination.id %>" class='js-more'>Read More</a>
-      </div><br>
-    <% end %>
-  </div>
-</div>
+<p><%=current_user.name%></p>
