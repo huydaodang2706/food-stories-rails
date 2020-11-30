@@ -10,6 +10,7 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     @food = @story.food
+    @comment = Comment.new
     if current_user
       # @comment = current_user.comments.build(story: @story)
     end
