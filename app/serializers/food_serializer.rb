@@ -1,4 +1,4 @@
 class FoodSerializer < ActiveModel::Serializer
-  attributes :id, :name
-  has_one :category
+  attributes :id, :name, :category
+  has_many :reviews
 end
