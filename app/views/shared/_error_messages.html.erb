@@ -1,10 +1,10 @@
-<% if @destination.errors.any? %>
+<% if @story.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger alert-devise">
-      The form contains <%= pluralize(@destination.errors.count, "error") %>.
+      The form contains <%= pluralize(@story.errors.count, "error") %>.
     </div>
     <ul>
-    <% @destination.errors.full_messages.each do |msg| %>
+    <% @story.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

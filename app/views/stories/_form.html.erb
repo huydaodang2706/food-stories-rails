@@ -1,15 +1,5 @@
-<%= form_with(model: story, local: true) do |form| %>
-  <% if story.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
-
-      <ul>
-        <% story.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for(@story) do |form| %>
+  <%= render 'shared/error_messages' %>
 
   <p>
     <%= form.label :title %>
@@ -21,15 +11,21 @@
     <%= form.text_field :location, class: 'form-control' %>
   </p>
   
-  <%= form.field_for :food do |food_builder| %>
+  <%= form.fields_for :food do |food_builder| %>
     <p><strong>Food Name</strong> <%= food_builder.text_field :name, class: 'form-control' %><br></p>
     <p><strong>Type of Food</strong> <%= food_builder.text_field :category, class: 'form-control' %><br></p>
   <% end %>
     
   <p>
     <%= form.label :content %>
-    <%= form.text_area :content, rows :10, class: 'form-control' %>
+    <%= form.text_area :content, rows: 10, class: 'form-control' %><br>
   </p>
+  
+  <p>
+    <%= form.label :image %>
+    <%= form.file_field :image, class: 'form-control' %><br>
+  </p>
+  
   
   <p><strong>Recommendations</strong><%= form.text_field :recommendation, class: 'form-control' %><br></p>
 

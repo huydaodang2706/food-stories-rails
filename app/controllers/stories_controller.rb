@@ -1,74 +1,99 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :edit, :update, :destroy]
-
-  # GET /stories
-  # GET /stories.json
   def index
     @stories = Story.all
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @stories }
+    end
   end
 
-  # GET /stories/1
-  # GET /stories/1.json
   def show
+    @story = Story.find(params[:id])
+    @food = @story.food
+    if current_user
+      # @comment = current_user.comments.build(story: @story)
+    end
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json:  @story }
+    end
   end
 
-  # GET /stories/new
+  def next_story
+    @story = Story.find(params[:id])
+    @next_story = @story.next
+    render json: @next_story
+  end
+
+  def previous_story
+    @story = Story.find(params[:id])
+    @previous_story = @story.previous
+    render json: @previous_story
+  end
+
   def new
-    @story = Story.new
+    @story ||= Story.new
+    @story.build_food
   end
 
-  # GET /stories/1/edit
-  def edit
-  end
-
-  # POST /stories
-  # POST /stories.json
   def create
     @story = Story.new(story_params)
+    @story.user = current_user
+    
+    @food = Food.new
+    @food.name = params[:story][:food][:name]
+    @food.category = params[:story][:food][:category]
 
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.json { render :show, status: :created, location: @story }
-      else
-        format.html { render :new }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
+    @food.save
+    
+    @story.food = @food
+    
+    if @story.save
+      redirect_to story_path(@story)
+    else
+      redirect_to new_story_path, alert: "You must add a title, content and location in order to create a story."
     end
   end
 
-  # PATCH/PUT /stories/1
-  # PATCH/PUT /stories/1.json
+  def edit
+    @story = Story.find(params[:id])
+  end
+
   def update
-    respond_to do |format|
-      if @story.update(story_params)
-        format.html { redirect_to @story, notice: 'Story was successfully updated.' }
-        format.json { render :show, status: :ok, location: @story }
-      else
-        format.html { render :edit }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
+    @story = Story.find(params[:id])
+    if !current_user
+      redirect_to new_user_session_path, alert: "You must be the author in order to edit a story."
+    elsif current_user != @story.user
+      redirect_to :back, alert: "You must be the author in order to edit a story."
+    else
+      @story.update(story_params)
+      redirect_to story_path(@story)
     end
   end
 
-  # DELETE /stories/1
-  # DELETE /stories/1.json
   def destroy
-    @story.destroy
-    respond_to do |format|
-      format.html { redirect_to stories_url, notice: 'Story was successfully destroyed.' }
-      format.json { head :no_content }
+    @story = Story.find(params[:id])
+    if !current_user
+      redirect_to new_user_session_path, alert: "You must be the author in order to delete a story."
+    elsif current_user != @story.user
+      redirect_to :back, alert: "You must be the author in order to delete a story."
+    else
+      @story.destroy
+      redirect_to stories_path
     end
   end
+
+  # def story_indexes
+  #   respond_to do |format|
+  #     format.html { render :show }
+  #     format.json { render json: story.all.map{|dest| dest.id}}
+  #   end
+  # end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_story
-      @story = Story.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def story_params
-      params.require(:story).permit(:title, :content, :location, :user_id, :food_id, :recommendation)
-    end
+  def story_params
+    params.require(:story).permit(:title, :location, :content, :image, :recommendation, :food_id, :food_attributes => [:name, :category])
+  end
+
 end

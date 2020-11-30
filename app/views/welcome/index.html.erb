@@ -4,9 +4,9 @@
     <h4 class="header-h4">Share your food story</h4>
       <br>
       <% if current_user %>
-        <%= link_to "Create Your Story", class: "btn btn-default" %>
+        <%= link_to "Create Your Story", new_story_path, class: "btn btn-default" %>
       <% else %>
-        <%= link_to "Sign up to create your food story",  class: "btn btn-default" %>
+        <%= link_to "Sign up to create your food story", new_user_registration_path, class: "btn btn-default" %>
       <% end %>
   </div>
 </header>
