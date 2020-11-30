@@ -17,7 +17,7 @@
         <% if current_user %>
           <li><%= link_to "Welcome, #{current_user.name}!", edit_user_registration_path(current_user) %></li>
         <% end %>
-        <li><%= link_to 'Food Stories' %></li>
+        <li><%= link_to 'Food Stories', stories_path %></li>
         <% if !current_user %>
         <li><%= link_to 'Log In', new_user_session_path %></li>
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
@@ -25,8 +25,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "My Food Stories" %></li>
-              <li><%= link_to "Add a Food Story" %></li>
+              <li><%= link_to "My Food Stories"%></li>
+              <li><%= link_to "Add a Food Story", new_story_path %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete  %></li>
             </ul>
