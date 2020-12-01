@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :stories
   has_many :comments
-  
+
   has_one_attached :avatar
+  validates :name, presence: true
+
 end
