@@ -12,7 +12,7 @@ class StoriesController < ApplicationController
     @food = @story.food
     @comment = Comment.new
     if current_user
-      # @comment = current_user.comments.build(story: @story)
+      @comment = current_user.comments.build(story: @story)
     end
     respond_to do |format|
       format.html { render :show }

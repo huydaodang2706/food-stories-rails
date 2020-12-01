@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_story
 
   # GET /comments
   # GET /comments.json
@@ -24,18 +25,24 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.new(comment_params)
+    @comment.story = @story
 
-    respond_to do |format|
+    # respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
+        # format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        url = "/stories/" + @comment.story_id.to_s
+        # format.html { redirect_to url, notice: 'Comment was successfully created.' }
+        # format.json { render :show, status: :created, location: @comment }
+        render json: url, status: 201
       else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        # format.html { render :new }
+        # format.json { render json: @comment.errors, status: :unprocessable_entity }
+        render json: {errors: @comment.errors.full_messages}, status: 400
       end
-    end
+    # end
   end
+
 
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
@@ -66,7 +73,11 @@ class CommentsController < ApplicationController
     def set_comment
       @comment = Comment.find(params[:id])
     end
-
+    
+    def set_story
+      @story = Story.find(params[:story_id])
+    end
+    
     # Only allow a list of trusted parameters through.
     def comment_params
       params.require(:comment).permit(:user_id, :stories, :content)
