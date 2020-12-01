@@ -17,50 +17,50 @@
 //= require_tree .
 
 $(function () {
-  var destinationArray = [];
+  var storyArray = [];
   var id = parseInt($(".js-next").attr("data-id"));
 
-  if ($("#destinationsInfo").length) {
-    loadAllDestinations();
+  if ($("#storiesInfo").length) {
+    loadAllStories();
   }
 
-  function loadAllDestinations() {
+  function loadAllStories() {
     $.ajax({
-      url: "/destinations.json",
+      url: "/stories.json",
       method: 'GET'
     })
     // promise
     .then(function(data) {
-       destinationArray = data;
+       storyArray = data;
        $.each(
-         destinationArray, function(index, destination) {
-           var destinationData = "<p><a href='/destinations/" + destination.id + "'>"
-            + destination.title + "</a><div id='content-" + destination.id + "'>"
-            + destination.content.substring(0, 250) + "..."
-            + "<a href='#' data-id='" + destination.id + "' class='js-more'>Read More</a></div><br>";
-           $('#destinationsInfo').append(destinationData);
+         storyArray, function(index, story) {
+           var storyData = "<p><a href='/stories/" + story.id + "'>"
+            + story.title + "</a><div id='content-" + story.id + "'>"
+            + story.content.substring(0, 250) + "..."
+            + "<a href='#' data-id='" + story.id + "' class='js-more'>Read More</a></div><br>";
+           $('#storiesInfo').append(storyData);
          }
        )
      });
   }
 
 
-// For the destinations index page
+// For the stories index page
 
-  $("#destinationsInfo").on('click', '.js-more', function(e) {
+  $("#storiesInfo").on('click', '.js-more', function(e) {
     e.preventDefault();
     var id = this.dataset.id;
-    $.get("/destinations/" + id + ".json", function(data) {
+    $.get("/stories/" + id + ".json", function(data) {
       $("#content-" + id).html(data.content)
     });
   });
 
-// For the Users Destinations Page
+// For the Users stories Page
 
-  $("#userDestinationsInfo").on('click', '.js-more', function(e) {
+  $("#userStoriesInfo").on('click', '.js-more', function(e) {
     e.preventDefault();
     var id = this.dataset.id;
-    $.get("/destinations/" + id + ".json", function(data) {
+    $.get("/stories/" + id + ".json", function(data) {
      $("#content-" + id).html(data.content);
 
     });
@@ -68,28 +68,28 @@ $(function () {
 
 // For the Users Show Page
 
-  $("#userDestinationsShowInfo").on('click', '.js-more', function(e) {
+  $("#userStoriesShowInfo").on('click', '.js-more', function(e) {
     e.preventDefault();
     var id = this.dataset.id;
-    $.get("/destinations/" + id + ".json", function(data) {
+    $.get("/stories/" + id + ".json", function(data) {
      $("#content-" + id).html(data.content);
 
     });
   });
 
-// For the Destinations Show page
+// For the stories Show page
 
-  function loadDestination(data) {
-      history.pushState({}, "", "/destinations/" + data.id)
-      var destinationCommentPath = '/destinations/' + data.id + '/comments/';
-      $("#new_comment").attr('action', destinationCommentPath);
-      $(".destinationTitle").text(data["title"]);
-      $(".destinationUserName").text(data["user"]["name"]);
-      $(".destinationLocation").text(data["location"]);
-      $(".destinationFoodName").text(data["food"]["name"]);
-      $(".destinationFoodCategory").text(data["food"]["category"]);
-      $(".destinationContent").text(data["content"]);
-      $(".destinationRecommendation").text(data["recommendation"]);
+  function loadStory(data) {
+      history.pushState({}, "", "/stories/" + data.id)
+      var storyCommentPath = '/stories/' + data.id + '/comments/';
+      $("#new_comment").attr('action', storyCommentPath);
+      $(".storyTitle").text(data["title"]);
+      $(".storyUserName").text(data["user"]["name"]);
+      $(".storyLocation").text(data["location"]);
+      $(".storyFoodName").text(data["food"]["name"]);
+      $(".storyFoodCategory").text(data["food"]["category"]);
+      $(".storyContent").text(data["content"]);
+      $(".storyRecommendation").text(data["recommendation"]);
       $(".js-next").attr("data-id", data["id"]);
       $(".js-previous").attr("data-id",data["id"]);
       $("#submitted-comments").empty();
@@ -103,18 +103,18 @@ $(function () {
 
   $(".js-next").on("click", function(event) {
     var id = $(".js-next").attr("data-id")
-    $.get("/destinations/" + id + "/next", function(data) {
+    $.get("/stories/" + id + "/next", function(data) {
       console.log(data)
-      loadDestination(data);
+      loadStory(data);
     });
     event.preventDefault();
   });
 
   $(".js-previous").on("click", function(event) {
     var id = $(".js-previous").attr("data-id")
-    $.get("/destinations/" + id + "/previous", function(data) {
+    $.get("/stories/" + id + "/previous", function(data) {
       console.log(data)
-      loadDestination(data);
+      loadStory(data);
     });
     event.preventDefault();
 
