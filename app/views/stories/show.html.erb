@@ -1,12 +1,15 @@
 <div class="container">
   <div class=" well col-sm-6">
     <%= render 'shared/error_messages' %>
-    <h4>Food Travel Story</h4>
-
-    <h2>Title: <span class="storyTitle"><%=@story.title%></span></h2>
     
-    <p>Location: <span class="storyLocation"><%=@story.location%></span></p>
-    <p>Name: <span class="storyFoodName"><%=@food.name%></span></p>
+    <h5 style="text-align: right; font-style: italic;">Food Travel Story</h5>
+
+    <h2 style="text-align: center"><span class="storyTitle"><%=@story.title%></span></h2>
+    
+    <p style="font-style: bold;"><b>Location:</b> <span class="storyLocation"><%=@story.location%></span></p>
+    <h4><b>Name: </b> <br>
+    <span class="storyFoodName"><%=@food.name%></span>
+    </h4>
     <p>Type of Food: <span class="storyFoodCategory"><%=@food.category%></span></p>
 
     <p>Content: <span class="storyContent"><%=@story.content%></span></p>
@@ -26,9 +29,6 @@
       <p>Please log in order to add a comment.</p>
     <% end %>
 
-    <% if @story.image.present? %>
-      <%= image_tag(@story.image,:size => "260x180") %>
-    <% end %> <br>
 
     <h4>Comments:</h4>
     <div id="submitted-comments">
@@ -43,4 +43,11 @@
     <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@story.id%>">View Next Food Story</a><br><br>
   </div>
 
+
+  <div class=" well col-sm-6">
+    <% if @story.image.present? %>
+      <%= image_tag(@story.image,:size => "530x360") %>
+    <% end %> <br>
+  </div>
+  
 </div>
