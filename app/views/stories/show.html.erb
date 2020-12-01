@@ -25,6 +25,11 @@
     <% else %>
       <p>Please log in order to add a comment.</p>
     <% end %>
+
+    <% if @story.image.present? %>
+      <%= image_tag(@story.image,:size => "260x180") %>
+    <% end %> <br>
+
     <h4>Comments:</h4>
     <div id="submitted-comments">
       <% @story.comments.each do |comment| %>
