@@ -1,4 +1,6 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-
-<p><%=current_user.name%></p>
+<div class="container">
+  <div class="col-md-8 well">
+    <h3>Welcome, <%= @user.name %>!</h3>
+    <h4>Email: <%= @user.email %></h4>
+  </div>
+</div>
