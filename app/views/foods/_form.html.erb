@@ -17,8 +17,11 @@
   </div>
 
   <div class="field">
-    <%= form.label :category %>
-    <%= form.text_field :category %>
+     
+    <%= select_tag(:category_id,
+               options_for_select(@categories), 
+               include_blank: "Select Category") %>
+     
   </div>
 
   <div class="actions">

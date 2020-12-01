@@ -4,7 +4,17 @@ class FoodsController < ApplicationController
   # GET /foods
   # GET /foods.json
   def index
-    @foods = Food.all
+    
+    @categories = Category.all
+    cate = params[:cate]
+    
+    if !cate.nil?
+      @foods = Food.where(:category_id => cate)
+    else
+      @foods = Food.all
+    end
+    
+     
   end
 
   # GET /foods/1
@@ -15,16 +25,23 @@ class FoodsController < ApplicationController
   # GET /foods/new
   def new
     @food = Food.new
+    @categories = Category.all.map { |c| [ c.name, c.id ] }
   end
 
   # GET /foods/1/edit
   def edit
+    
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   # POST /foods
   # POST /foods.json
   def create
     @food = Food.new(food_params)
+     @food.category_id = params[:category_id] 
+    if @food.save == false      
+      @categories = Category.all.map{|c| [ c.name, c.id ] } 
+    end
 
     respond_to do |format|
       if @food.save
@@ -40,6 +57,7 @@ class FoodsController < ApplicationController
   # PATCH/PUT /foods/1
   # PATCH/PUT /foods/1.json
   def update
+    @product.category_id = params[:category_id]
     respond_to do |format|
       if @food.update(food_params)
         format.html { redirect_to @food, notice: 'Food was successfully updated.' }
@@ -69,6 +87,6 @@ class FoodsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def food_params
-      params.require(:food).permit(:name, :category)
+      params.require(:food).permit(:name, :category_id)
     end
 end
