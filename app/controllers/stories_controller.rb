@@ -24,7 +24,7 @@ class StoriesController < ApplicationController
 
   def new
     @story ||= Story.new
-    @story.build_food
+    # @story.build_food
     @foods = Food.all.map { |c| [ c.name, c.id ] }
     @categories = Category.all
   end
