@@ -1,5 +1,6 @@
 class StoriesController < ApplicationController
   def index
+    @foods = Food.all
     @stories = Story.all
     respond_to do |format|
       format.html { render :index }
@@ -35,16 +36,21 @@ class StoriesController < ApplicationController
   def new
     @story ||= Story.new
     @story.build_food
+    @foods = Food.all.map { |c| [ c.name, c.id ] }
+    @categories = Category.all
   end
 
   def create
-    @story = Story.new(story_params)
+      @story = Story.new(story_params)
+      @story.food_id = params[:food_id] 
+    if @story.save == false      
+      @food = Food.all.map{|c| [ c.name, c.id ] } 
+    end
     @story.user = current_user
     
     @food = Food.new
     @food.name = params[:story][:food][:name]
-    @food.category = params[:story][:food][:category]
-
+    @food.category_id = params[:category]
     @food.save
     
     @story.food = @food
@@ -52,12 +58,13 @@ class StoriesController < ApplicationController
     if @story.save
       redirect_to story_path(@story)
     else
-      redirect_to new_story_path, alert: "You must add a title, content and location in order to create a story."
+      redirect_to new_story_path, alert: "You must add a title, content and location in order to create a story." 
     end
   end
 
   def edit
     @story = Story.find(params[:id])
+    @foods = Food.all.map { |c| [ c.name, c.id ] }
   end
 
   def update

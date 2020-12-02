@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+<h3> Foods under this category </h3>
+  <% Food.where(category_id: @category.id).each do |food| %>
+<li> <%= link_to food.name, foods_path(@food) %> </li>
+<% end %>
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

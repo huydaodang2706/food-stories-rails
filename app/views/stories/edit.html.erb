@@ -14,10 +14,14 @@
         <%= story_builder.text_field :location, class: 'form-control' %><br>
       </p>
 
-      <%= story_builder.fields_for :food do |food_builder| %>
-        <p><strong>Food Name</strong> <%= food_builder.text_field :name, class: 'form-control' %><br></p>
-        <p><strong>Type of Food</strong> <%= food_builder.text_field :category, class: 'form-control' %><br></p>
-      <% end %>
+      <!--<p>-->
+      <!--<#%= story_builder.label :name %>-->
+      <!--  <#%= story_builder.text_field :name, class: 'form-control' %><br>-->
+        
+      <!--</p>-->
+       <p><strong> Food Name  ( t nghĩ bỏ cái type of food name của Nam.) </strong>
+          <%= select_tag(:food_id, options_for_select(@foods), include_blank: "Select  Type of Food") %><br>
+       </p>
 
       <p>
         <%= story_builder.label :content %>
