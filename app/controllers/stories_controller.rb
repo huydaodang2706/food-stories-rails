@@ -22,18 +22,6 @@ class StoriesController < ApplicationController
     end
   end
 
-  def next_story
-    @story = Story.find(params[:id])
-    @next_story = @story.next
-    render json: @next_story
-  end
-
-  def previous_story
-    @story = Story.find(params[:id])
-    @previous_story = @story.previous
-    render json: @previous_story
-  end
-
   def new
     @story ||= Story.new
     @story.build_food
@@ -72,8 +60,11 @@ class StoriesController < ApplicationController
 
   def edit
     @story = Story.find(params[:id])
-    @foods = Food.all.map { |c| [ c.name, c.id ] }
+    @foods = Food.all
+    @categories = Category.all
+ 
   end
+  
 
   def update
     @story = Story.find(params[:id])
