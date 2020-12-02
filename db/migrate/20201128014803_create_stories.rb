@@ -5,7 +5,7 @@ class CreateStories < ActiveRecord::Migration[6.0]
       t.text :content
       t.string :location
       t.integer :user_id
-      t.integer :food_id
+      t.string :name
       t.string :recommendation
 
       t.timestamps

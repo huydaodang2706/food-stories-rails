@@ -12,8 +12,8 @@
   </p>
   
   <%= form.fields_for :food do |food_builder| %>
-    <p><strong>Food Name</strong> <%= food_builder.text_field :name, class: 'form-control' %><br></p>
-    <p><strong>Type of Food</strong> <%= food_builder.text_field :category, class: 'form-control' %><br></p>
+    <!--<p><strong>Food Name</strong> <%= food_builder.text_field :name, class: 'form-control' %><br></p>-->
+    <p><strong>Type of Food</strong> <%= select_tag(:food_id, options_for_select(@foods), include_blank: "Select Category") %><br></p>
   <% end %>
     
   <p>
