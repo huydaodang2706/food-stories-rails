@@ -7,9 +7,9 @@
     <h2 style="text-align: center"><span class="storyTitle"><%=@story.title%></span></h2>
     
     <p style="font-style: bold;"><b>Location:</b> <span class="storyLocation"><%=@story.location%></span></p>
-    <!--<h4><b>Name: </b> <br>-->
-    <!--<span class="storyFoodName"><#%= @story.food.name%></span>-->
-    <!--</h4>-->
+    <h4><b>Food name: </b> 
+    <span class="storyFoodName"><%= @story.food.name %></span>
+    </h4>
     
       <p>Type of Food: <span class="storyFoodCategory"><%= @story.food.category.name %></span></p>
     
