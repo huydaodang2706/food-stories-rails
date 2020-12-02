@@ -23,10 +23,10 @@
     <% if current_user %>
       <h4>Add a comment:</h4>
         <%= form_for @comment, url: story_comments_path(@story, @comment)  do |f| %>
-          <p><strong>Content</strong> <%= f.text_area :content, class: 'commentBox form-control' %></p>
-           <%= f.submit "Create Comment", class: "btn btn-sm btn-primary" %> 
-          
-        <% end %><br>
+          <p><%= f.text_area :content, class: 'commentBox form-control' %></p>
+          <button type="submit" class="btn btn-sm btn-primary" onclick=location.reload()>Create Comment</button>
+        <% end %>
+      <br>
     <% else %>
       <p>Please log in order to add a comment.</p>
     <% end %>
@@ -34,18 +34,15 @@
 
     <h4>Comments:</h4>
     <div id="submitted-comments">
-      <% @story.comments.each do |comment| %>
+      <% @story.comment.each do |comment| %>
       <div class="well well-white" id="comment-<%= comment.id %>">
         <strong class="commentUserName"><%= comment.user.name %></strong> says: <span class="commentContent"><%= comment.content %></span>
       </div>
       <% end %>
     </div>
-
-    <a href="#" class="js-previous btn btn-primary btn-sm" data-id="<%=@story.id%>">View Previous Food Story</a><br><br>
-    <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@story.id%>">View Next Food Story</a><br><br>
+    
   </div>
-
-
+    
   <div class=" well col-sm-6">
     <% if @story.image.present? %>
       <%= image_tag(@story.image,:size => "530x360") %>
