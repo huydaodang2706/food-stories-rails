@@ -26,6 +26,15 @@ class Story < ApplicationRecord
           Story.last
         end
     end
-    
-    
+
+    def self.search_by_category(category_id)
+      Story.joins("INNER JOIN foods ON food_id = foods.id 
+        INNER JOIN categories ON foods.category_id = categories.id").
+      where("categories.id = ?","#{category_id}")
+    end
+
+    def self.search_by_food(food_id)
+      Story.joins("INNER JOIN foods ON food_id = foods.id").
+      where("food.id = ?","#{food_id}")
+    end
 end

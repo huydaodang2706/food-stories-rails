@@ -1,8 +1,9 @@
 <div class="container">
   <div class="well col-sm-12">
-    <%= link_to "Filter by category", filter_story_category_path, class: "btn btn-default" %>
-    <%= link_to "Filter by category", filter_story_food_path, class: "btn btn-default" %>
-
+    <%= form_tag filter_story_category_path, :method => 'get', class: "index-form" do %>
+      Select category <%= collection_select "category","id", Category.all, :id, :name %>
+      <%= submit_tag "Filter", class: "btn btn-default" %>
+    <% end %>  
     <% @stories.each do |fstory| %>
         <div class="well well-white">
           <h5><b><%= link_to fstory.title, story_path(fstory) %></b></h5>
