@@ -11,7 +11,7 @@
     <span class="storyFoodName"><%= @story.food.name %></span>
     </h4>
     
-      <p>Type of Food: <span class="storyFoodCategory"><%= @story.food.category.name %></span></p>
+      <p>Type of Food: <span class="storyFoodCategory"><%= @story.food.category.name if @story.food.category.name.present? %></span></p>
     
 
     <p>Content: <span class="storyContent"><%=@story.content%></span></p>
