@@ -37,6 +37,7 @@ class StoriesController < ApplicationController
     @story ||= Story.new
     @story.build_food
     @foods = Food.all.map { |c| [ c.name, c.id ] }
+    @categories = Category.all
   end
 
   def create
@@ -48,6 +49,8 @@ class StoriesController < ApplicationController
     @story.user = current_user
     
     @food = Food.new
+    @food.name = params[:story][:food][:name]
+    @food.category_id = params[:category]
     @food.save
     
     @story.food = @food
