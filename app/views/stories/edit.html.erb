@@ -13,7 +13,7 @@
         <%= story_builder.label :location %>
         <%= story_builder.text_field :location, class: 'form-control' %><br>
       </p>
-      
+
       <p><strong>Food Name: </strong><span class="storyFoodName"><%= @story.food.name %></span>
       
       <%= story_builder.fields_for :food do |food_builder| %>
@@ -21,16 +21,26 @@
         <%= select_tag("category", options_from_collection_for_select(@categories, "id", "name")) %><br></p>
       <% end %>
       
-
       <p>
         <%= story_builder.label :content %>
         <%= story_builder.text_area :content, rows: 10, class: 'form-control' %><br>
       </p>
-
+      
       <p><strong>Recommendations</strong><%= story_builder.text_field :recommendation, class: 'form-control' %><br></p>
-
-
+      
+      <p>
+        <%= story_builder.label :image %>
+        <%= story_builder.file_field :image, class: 'form-control' %><br>
+      </p>
+      
+      
       <%= story_builder.submit "Update Story", class: "btn btn-md btn-primary" %>
     <% end %>
+  </div>
+  
+  <div class=" well col-sm-6">
+    <% if @story.image.present? %>
+      <%= image_tag(@story.image,:size => "530x360") %>
+    <% end %> <br>
   </div>
 </div>

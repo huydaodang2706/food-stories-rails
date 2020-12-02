@@ -23,13 +23,12 @@
     <%= form.text_area :content, rows: 10, class: 'form-control' %><br>
   </p>
   
+  <p><strong>Recommendations</strong><%= form.text_field :recommendation, class: 'form-control' %><br></p>
+  
   <p>
     <%= form.label :image %>
     <%= form.file_field :image, class: 'form-control' %><br>
   </p>
-  
-  
-  <p><strong>Recommendations</strong><%= form.text_field :recommendation, class: 'form-control' %><br></p>
 
   <%= form.submit "Create Story", class: "btn btn-md btn-primary" %>
 <% end %>

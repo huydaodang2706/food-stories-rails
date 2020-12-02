@@ -35,6 +35,6 @@ class Story < ApplicationRecord
 
     def self.search_by_food(food_id)
       Story.joins("INNER JOIN foods ON food_id = foods.id").
-      where("food.id = ?","#{food_id}")
+      where("foods.id = ?","#{food_id}")
     end
 end
