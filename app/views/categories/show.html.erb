@@ -1,23 +1,18 @@
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div class="container">
+  <p id="notice"><%= notice %></p>
+ 
+    <h2>Category</h2>
 
-<body>
-<p id="notice"><%= notice %></p>
+    <h4 style="text-align: middle; font-style: italic;"><%= @category.name %></h4>
 
-<div class="w3-container">
-  <h2>Category</h2>
+    <h3> Foods under this category </h3>
+      
+          <% Food.where(category_id: @category.id).each do |food| %>
+            <h4 style="text-align: middle; font-style: italic;"><%= link_to food.name, foods_path(@food) %></h4></div>
+          <% end %>
 
-  <div class="w3-panel w3-card w3-yellow"><p><%= @category.name %></p></div>
+  <button class="button"><%= link_to 'Edit', edit_category_path(@category) %> </button> 
+  <button class="button button2"><%= link_to 'Back', categories_path %></button>
   
 </div>
-<h3> Foods under this category </h3>
-  <div class="w3-container">
-      <% Food.where(category_id: @category.id).each do |food| %>
-        <div class="w3-panel w3-card w3-yellow"><p><%= link_to food.name, foods_path(@food) %></p></div>
-      <% end %>
- </div>
-
-
-<button class="button"><%= link_to 'Edit', edit_category_path(@category) %> </button> 
-<button class="button button2"><%= link_to 'Back', categories_path %></button>

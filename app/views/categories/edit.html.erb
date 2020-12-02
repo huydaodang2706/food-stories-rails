@@ -1,8 +1,12 @@
-<h1>Editing Category</h1>
+<div class="container">
+  
 
-<%= render 'form', category: @category %>
+  <h1>Editing Category</h1>
+  
+  <%= render 'form', category: @category %>
+  
+  
+    <button class="button text-center "><%= link_to 'Show', @category %> </button> |
+    <button class="button text-center "><%= link_to 'Back', categories_path %> </button> 
 
-
-  <button class="button text-center "><%= link_to 'Show', @category %> </button> |
-  <button class="button text-center "><%= link_to 'Back', categories_path %> </button> 
-
+</div>
