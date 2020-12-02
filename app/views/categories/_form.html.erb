@@ -1,3 +1,5 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%= form_with(model: category, local: true) do |form| %>
   <% if category.errors.any? %>
     <div id="error_explanation">
@@ -10,13 +12,17 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="w3-container">
+  <div class="w3-panel w3-card w3-yellow">
+    <p>    
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </p>
+  </div>
+  
   </div>
 
-  <div class="actions">
+  <div class="button">
     <%= form.submit %>
   </div>
 <% end %>

@@ -1,27 +1,28 @@
+
 <p id="notice"><%= notice %></p>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <h1>Categories</h1>
+<p>
+  
+<button class="button "><%= link_to 'New Category', new_category_path %></button> 
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+</p>
+
+<h2 class= " font-size:160%"> Name</h2>
 
   <tbody>
     <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.name %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <div class="w3-container">
+        <p style="font-size:160%"; ><%= category.name %></p>
+  
+    </div >
+    <button class="button text-center "><%= link_to 'Show', category %> </button> 
+    <button class="button text-center "><%= link_to 'Edit', edit_category_path(category) %> </button> 
+    <button class="button text-center "><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></button>
+
     <% end %>
   </tbody>
-</table>
 
-<br>
 
-<%= link_to 'New Category', new_category_path %>

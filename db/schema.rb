@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2020_12_01_215423) do
     t.text "content"
     t.string "location"
     t.integer "user_id"
-    t.integer "food_id"
+    t.string "name"
     t.string "recommendation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

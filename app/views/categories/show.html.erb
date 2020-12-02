@@ -1,12 +1,23 @@
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<body>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
+<div class="w3-container">
+  <h2>Category</h2>
+
+  <div class="w3-panel w3-card w3-yellow"><p><%= @category.name %></p></div>
+  
+</div>
 <h3> Foods under this category </h3>
-  <% Food.where(category_id: @category.id).each do |food| %>
-<li> <%= link_to food.name, foods_path(@food) %> </li>
-<% end %>
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+  <div class="w3-container">
+      <% Food.where(category_id: @category.id).each do |food| %>
+        <div class="w3-panel w3-card w3-yellow"><p><%= link_to food.name, foods_path(@food) %></p></div>
+      <% end %>
+ </div>
+
+
+<button class="button"><%= link_to 'Edit', edit_category_path(@category) %> </button> 
+<button class="button button2"><%= link_to 'Back', categories_path %></button>
