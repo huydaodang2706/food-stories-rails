@@ -25,16 +25,18 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = current_user.comments.new(comment_params)
+    @comment = Comment.new(comment_params)
+    @comment.user = current_user
     @comment.story = @story
 
     # respond_to do |format|
       if @comment.save
         # format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        url = "/stories/" + @comment.story_id.to_s
-        # format.html { redirect_to url, notice: 'Comment was successfully created.' }
-        # format.json { render :show, status: :created, location: @comment }
-        render json: url, status: 201
+        redirect_to story_path(@comment.story)
+        # url = "/stories/" + @comment.story_id.to_s
+        # # format.html { redirect_to url, notice: 'Comment was successfully created.' }
+        # # format.json { render :show, status: :created, location: @comment }
+        # render json: url, status: 201
       else
         # format.html { render :new }
         # format.json { render json: @comment.errors, status: :unprocessable_entity }
