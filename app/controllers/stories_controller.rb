@@ -1,4 +1,5 @@
 class StoriesController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
   def index
     @foods = Food.all
     @stories = Story.all
@@ -48,12 +49,19 @@ class StoriesController < ApplicationController
     end
     @story.user = current_user
     
-    @food = Food.new
-    @food.name = params[:story][:food][:name]
-    @food.category_id = params[:category]
-    @food.save
+    @food_check = Food.find_by(name: params[:story][:food][:name])
+
+    # Huy san
+    if @food_check
+      @story.food = @food_check
+    else
+      @food = Food.new
+      @food.name = params[:story][:food][:name]
+      @food.category_id = params[:category]
+      @food.save  
+      @story.food = @food
+    end
     
-    @story.food = @food
     
     if @story.save
       redirect_to story_path(@story)
