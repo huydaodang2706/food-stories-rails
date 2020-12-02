@@ -13,6 +13,7 @@ class FoodsController < ApplicationController
     else
       @foods = Food.all
     end
+
     
      
   end
