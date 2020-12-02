@@ -1,4 +1,10 @@
 <div class="container">
-  <div id="storiesInfo" class="well col-sm-12">
+  <div class="well col-sm-12">
+       <% @stories.each do |fstory| %>
+           <div class="well well-white">
+              <h5><b><%= link_to fstory.title, story_path(fstory) %></b></h5>
+              <p></p>
+           </div>
+       <% end %>
   </div>
 </div>

@@ -1,13 +1,43 @@
+<div class="center jumbotron"></div>
 <header class="main-header">
   <div class="title">
-    <h1 class="header-h1">Food Stories</h1>
-    <h4 class="header-h4">Share your food story</h4>
+    <h1 class="header-h1">Share your food story</h1>
       <br>
       <% if current_user %>
         <%= link_to "Create Your Story", new_story_path, class: "btn btn-default" %>
+        <%= link_to "View Food Stories", stories_path, class: "btn btn-default" %>
       <% else %>
         <%= link_to "Sign up to create your food story", new_user_registration_path, class: "btn btn-default" %>
+        <%= link_to "View Food Stories", stories_path, class: "btn btn-default" %>
       <% end %>
   </div>
 </header>
-<div class="center jumbotron"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-6 col-md-4">
+      <div class="under1"></div>
+    </div>
+    
+    <div class="col-6 col-md-4">
+      <div class="under2"></div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="under3"></div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-6 col-md-4">
+      <div class="under4"></div>
+    </div>
+    
+    <div class="col-6 col-md-4">
+      <div class="under5"></div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="under6"></div>
+    </div>
+  </div>
+  
+</div>
+</div>
