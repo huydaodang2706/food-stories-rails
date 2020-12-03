@@ -16,10 +16,7 @@
 
       <p><strong>Food Name: </strong><span class="storyFoodName"><%= @story.food.name %></span>
       
-      <%= story_builder.fields_for :food do |food_builder| %>
-        <p><strong>Type of Food</strong> 
-        <%= select_tag("category", options_from_collection_for_select(@categories, "id", "name")) %><br></p>
-      <% end %>
+      <p><strong>Type of Food: </strong><span class="storyFoodName"><%= @story.food.category.name %></span>
       
       <p>
         <%= story_builder.label :content %>

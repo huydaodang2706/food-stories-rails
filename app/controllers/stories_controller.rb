@@ -13,6 +13,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @food = @story.food
     @comment = Comment.new
+    
     if current_user
       @comment = current_user.comments.build(story: @story)
     end
@@ -30,11 +31,8 @@ class StoriesController < ApplicationController
   end
 
   def create
-      @story = Story.new(story_params)
-      @story.food_id = params[:food_id] 
-    if @story.save == false      
-      @food = Food.all.map{|c| [ c.name, c.id ] } 
-    end
+    @story = Story.new(story_params)
+      
     @story.user = current_user
     
     @food_check = Food.find_by(name: params[:story][:food][:name])
@@ -89,13 +87,6 @@ class StoriesController < ApplicationController
       redirect_to stories_path
     end
   end
-
-  # def story_indexes
-  #   respond_to do |format|
-  #     format.html { render :show }
-  #     format.json { render json: story.all.map{|dest| dest.id}}
-  #   end
-  # end
 
   private
 
