@@ -2,15 +2,19 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
  
-    <h2>Category</h2>
+    <h3>Category</h3>
 
-    <h4 style="text-align: middle; font-style: italic;"><%= @category.name %></h4>
+    <h2 style="text-align: middle; font-style: italic; color:blue;margin-left:100px;"> <b><%= @category.name %></b></h2>
 
-    <h3> Foods under this category </h3>
-      
+    <h4> Foods under this category </h4>
+        <ul>
           <% Food.where(category_id: @category.id).each do |food| %>
-            <h4 style="text-align: middle; font-style: italic;"><%= link_to food.name, foods_path(@food) %></h4>
+            <li>
+              <h4 style="text-align: middle; font-style: italic; color:green;"><%= food.name %></h4>
+            </li>
+            
           <% end %>
+        </ul>
 
   <button class="button"><%= link_to 'Edit', edit_category_path(@category) %> </button> 
   <button class="button button2"><%= link_to 'Back', categories_path %></button>

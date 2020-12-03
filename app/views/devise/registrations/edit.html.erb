@@ -54,9 +54,9 @@
 
     <%= link_to "Back", :back %>
   </div>
-  <div class=" well col-sm-6">
+  <div class=" well col-sm-6" ">
     <% if current_user.avatar.present? %>
-      <%= image_tag(current_user.avatar, :size => "530x360") %>
+      <%= image_tag(current_user.avatar, :size => "530x530") %>
     <% end %><br>
   </div>
 </div>
